@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+label{
+    font-weight: 600;
+}
+
+input{
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.ls-2{
+    letter-spacing: 2px;
+}
+
+
+.form-check-input {
+
+    border: var(--bs-border-width) solid #0e0e0e;
+
+}
+
+
+body{
+    font-family: math;
+}

@@ -1,0 +1,149 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div class="d-flex justify-content-between">
+
+        <h4>My Profile</h4>
+
+    </div>
+    <div class="main-box p-1" style="width: 100%;">
+
+        <form style="" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="employeeFName">First Name</label>
+                        <input required="true" type="text" class="form-control" id="employeeFName"
+                            formControlName="employeeFName">
+                    </div>
+                    <div class="error-msg" *ngIf="submitted && a.employeeFName.errors">
+                        <span style="color:red" *ngIf="a.employeeFName.errors['required']">First Name
+                            is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="employeeLName">Last Name</label>
+                        <input required="true" type="text" class="form-control" id="employeeLName"
+                            formControlName="employeeLName">
+                    </div>
+                    <div class="error-msg" *ngIf="submitted && a.employeeLName.errors">
+                        <span style="color:red" *ngIf="a.employeeLName.errors['required']">Last Name
+                            is required.</span>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="row mb-4">
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="mobile">Mobile</label>
+                        <input required="true" type="text" class="form-control" id="mobile"
+                            formControlName="phone">
+                    </div>
+                    <div class="error-msg" *ngIf="submitted && a.phone.errors">
+                        <span style="color:red" *ngIf="a.phone.errors['required']">Phone number
+                            is required.</span>
+                    </div>
+                </div>
+
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="employeeEmail">Email</label>
+                        <input required="true" type="text" class="form-control" id="employeeEmail"
+                            formControlName="employeeEmail">
+                    </div>
+                    <div class="error-msg" *ngIf="submitted && a.employeeEmail.errors">
+                        <span style="color:red" *ngIf="a.employeeEmail.errors['required']">Email
+                            is required.</span>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="row mb-4">
+
+
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="address">Street</label>
+                        <input required="true" type="text" class="form-control" id="address"
+                            formControlName="street">
+                    </div>
+                </div>
+                <div class="error-msg" *ngIf="submitted && a.street.errors">
+                    <span style="color:red" *ngIf="a.street.errors['required']">Street
+                        is required.</span>
+                </div>
+
+
+                <div class="col-6">
+                    <div class="col-6">
+                        <div class="form-group auth-form-group-custom mb-0">
+                            <label for="birthDate">Birth Date</label>
+                            <input required="true" type="date" class="form-control" id="birthDate"
+                                formControlName="birthDate">
+                        </div>
+                    </div>
+                    <div class="error-msg" *ngIf="submitted && a.birthDate.errors">
+                        <span style="color:red" *ngIf="a.birthDate.errors['required']">Birth date
+                            is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <label for="cityId" class="form-label">City</label>
+                    <select class="form-select" formControlName="cityId" id="cityId"
+                        [ngClass]="{ 'is-invalid': submitted && a.cityId.errors }">
+
+                        <option value="">-----</option>
+                        <option value="{{city.cityId}}" *ngFor="let city of cities">{{city.cityName}}</option>
+
+                    </select>
+                    <div class="error-msg" *ngIf="submitted && a.cityId.errors">
+                        <span style="color:red" *ngIf="a.cityId.errors['required']">City
+                            is required.</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-6">
+                        <div class="form-group auth-form-group-custom mb-0">
+                            <label for="joiningDate">Joining Date</label>
+                            <input required="true" type="date" class="form-control" id="joiningDate"
+                                formControlName="joiningDate">
+                        </div>
+                    </div>
+                    <div class="error-msg" *ngIf="submitted && a.joiningDate.errors">
+                        <span style="color:red" *ngIf="a.joiningDate.errors['required']">Birth date
+                            is required.</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="d-flex justify-content-center pt-2">
+
+                <button type="submit" class="btn btn-primary text-center" style="">Submit</button>
+            </div>
+            <div *ngIf="errorMsg" class="alert alert-danger py-2 mt-2" role="alert">
+                {{errorMsg}}
+            </div>
+
+        </form>
+    </div>
+
+
+</div>

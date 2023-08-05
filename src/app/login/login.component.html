@@ -1,0 +1,64 @@
+<div class="container d-flex justify-content-center align-items-center p-4" style="height: 100%;">
+
+
+    <div class="main-box p-4" style="width: 70%;">
+        <div class="d-flex justify-content-around ">
+
+            <button class="btn btn-sm btn-primary"><b>Login</b></button>
+            <a routerLink="/register" class="btn btn-sm btn-outline-primary"><b>SignUp</b></a>
+
+        </div>
+
+
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <hr />
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" (keydown.space)="$event.preventDefault()"
+                    formControlName="username" [ngClass]="{ 'is-invalid': submitted && a.username.errors }">
+                <div class="error-msg" *ngIf="submitted && a.username.errors">
+                    <span style="color:red" *ngIf="a.username.errors['required']">Username
+                        is required.</span>
+                </div>
+            </div>
+
+
+            <div class="mb-4" style="position: relative;">
+                <label for="password" class="form-label">Password</label>
+<!-- [type] is used to change the type as per condition like when we click on EYE icon it will show the password
+and it will change to text -->
+                <input [type]="password ? 'text' : 'password' " class="form-control"
+                    (keydown.space)="$event.preventDefault()" formControlName="password" id="password"
+                    [ngClass]="{ 'is-invalid': submitted && a.password.errors }">
+                <i (click)="showPassword()" class="eye-btn fa " [ngClass]="password ? 'fa-eye' : 'fa-eye'"></i>
+
+                <div class="error-msg" *ngIf="submitted && a.password.errors">
+                    <span style="color:red" *ngIf="a.password.errors['required']">Password
+                        is required.</span>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center pt-4">
+
+                <button type="submit" class="btn btn-outline-primary text-center " style=""><b class="ls-2">Submit</b></button>
+            </div>
+
+            <div *ngIf="errorMsg" class="alert alert-danger py-2 mt-2" role="alert">
+                {{errorMsg}}
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center" style="gap:10px; margin-top: 4rem;">
+
+                <span class="">New User ? click here</span>
+                <a routerLink="/register" class="fw-bold">SignUp</a>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>

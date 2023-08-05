@@ -1,0 +1,149 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div class="d-flex justify-content-between">
+        <!-- Hearder of dynamic page -->
+        <h4>Cargo management</h4>
+        <!-- Button is creted to add cargos with X button which is clearform and addcargon button with submit -->
+        <button class="btn btn-sm btn-outline-primary" (click)="clearform(); open(addCargo)">Add cargo type</button>
+
+    </div>
+    <div *ngIf="errorMsg" class="alert alert-danger py-2 mt-2" role="alert"> 
+        <!--Error message if page is not displaying or the API is not working-->
+        {{errorMsg}}
+    </div>
+
+    <div class="main-box p-1" style="width: 100%;">
+        <form>
+            <div class="mb-3 row"> <!--search bar is created here with filter input type this method is 
+                                        defined in .ts file for filtering-->
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text"
+                        (input)="filterSearch($event.target)" />
+                </div>
+            </div>
+        </form>
+
+        <table class="table"> <!-- table is started here-->
+            <thead class="thead-light">
+                <tr><!--table row is starting here-->
+                    <!--table header is starting here-->
+                    <th class="badge-grey">#</th>
+                    <th class="badge-grey">Name</th>
+                    <th class="badge-grey">Fare</th>
+                    <th class="badge-grey">Action</th>								
+
+                </tr>
+            </thead>
+            <tbody> <!--table body is starting here that is information-->
+                <tr [hidden]="cargos.length>0"> <!--if Cargo length is 0 then it will display in 
+                        next row that data is not found-->
+                    <td colspan="4" class="text-center">No Data Found</td>
+                </tr>
+                <tr *ngFor="let cargo of cargos"> <!--nfFor is used like foreach method until the 
+                                                    object length completed it will print data in table -->
+
+                    <th scope="row">{{ cargo.cargoCategoryId}}</th> 
+                    <!--table values or data is displayed here in {{Data}}   -->
+                    
+                    <td>{{cargo.cargoCategoryType}}</td>
+
+                    <td>{{cargo.cargoPrice}}</td>
+
+                    <td ><!--For every row there is a update method with edit icon this handleUpdate method 
+                    which is in .ts will perform the edit or update functionality -->
+                        <button class="btn btn-sm py-0 btn-primary"  (click)="handleUpdate(cargo); open(content)" >
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody> <!--Body of table is closing here and all the tags are closing here-->
+        </table>
+
+    </div>
+
+</div>
+
+
+
+     <!--ng-temple is used with bootstrap MODAL which is used to create a form which will
+    pop up when  action is performed on it or a click is done on it-->
+    <!-- ************************ -->
+    <!-- This is a temple for update is starting  -->
+<ng-template #content let-modal>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cargo Update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!--Form is starting from here-->
+        <form [formGroup]="cargoForm"  (ngSubmit)="updateCargoType()">
+        
+            <div class=" mb-4">
+                <div class="form-group auth-form-group-custom mb-0">
+                    <label for="cargoCategoryType">Category</label>
+                    <input required="true" type="text" class="form-control" id="cargoCategoryType" formControlName="cargoCategoryType">
+                </div>
+            </div>
+
+            <div class=" mb-4">
+                <div class="form-group auth-form-group-custom mb-0">
+                    <label for="cargoPrice">Price</label>
+                    <input required type="number" class="form-control" id="cargoPrice" formControlName="cargoPrice">
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <button class="btn btn-primary w-md waves-effect waves-light" 
+                    type="submit">Submit</button>
+            </div>
+
+
+        </form> <!--Form is ending here-->
+    </div>
+ 
+</ng-template> <!--templte is ending here-->
+
+
+
+<!--ng-temple is used with bootstrap MODAL which is used to create a form which will
+    pop up when  action is performed on it or a click is done on it-->
+    <!-- ************************ -->
+    <!-- This is a temple for add is starting  -->
+<ng-template #addCargo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Cargo Category</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+         <!--Form is starting from here-->
+        <form [formGroup]="cargoForm"  (ngSubmit)="addCargoType()">
+        
+            <div class=" mb-4">
+                <div class="form-group auth-form-group-custom mb-0">
+                    <label for="cargoCategoryType">Category</label>
+                    <input required="true" type="text" class="form-control" id="cargoCategoryType" formControlName="cargoCategoryType">
+                </div>
+            </div>
+
+            <div class=" mb-4">
+                <div class="form-group auth-form-group-custom mb-0">
+                    <label for="cargoPrice">Price</label>
+                    <input required type="number" class="form-control" id="cargoPrice" formControlName="cargoPrice">
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <button class="btn btn-primary w-md waves-effect waves-light" 
+                    type="submit">Submit</button>
+            </div>
+            <div *ngIf="errorMsg" class="alert alert-danger py-2 mt-2" role="alert">
+                {{errorMsg}}
+            </div>
+        
+
+        </form><!--Form is ending here-->
+    </div>
+ 
+</ng-template><!--templte is ending here-->

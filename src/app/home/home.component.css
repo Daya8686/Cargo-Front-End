@@ -1,0 +1,17 @@
+.customer-main-bg{
+    background-image: url('../../assets/images/air-cargo-bg.jpg');
+
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: cover;    */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customer-name{
+    z-index: 1;
+
+}

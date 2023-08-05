@@ -1,0 +1,78 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div>
+
+        <h4 *ngIf="role.match('customer')">My Orders</h4>
+        <h4 *ngIf="!role.match('customer')">All Orders</h4>
+    </div>
+    <div *ngIf="errorMsg" class="alert alert-danger py-2 mt-2" role="alert">
+        {{errorMsg}}
+    </div>
+    <div class="main-box p-1" style="width: 100%;">
+
+        <form>
+            <div class="mb-3 row">
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text"
+                        (input)="filterSearch($event.target)" />
+                </div>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone No</th>
+                    <th scope="col">Price</th>
+                    <!-- <th scope="col">Status</th> -->
+                    <th scope="col" *ngIf="iscancelEnable">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr [hidden]="orders.length>0">
+                    <td colspan="4" class="text-center">No Data Found</td>
+                </tr>
+                <tr *ngFor="let order of orders">
+
+                    <th scope="row">{{ order.cargoorderDetailsId}}</th>
+                    <td>{{order.customerName}}</td>
+                    <td>{{order.customerPhone}}</td>
+                    <td>{{order.amount}}</td>
+
+                    <!-- <td><span class="badge rounded-pill text-bg-danger">Pending</span></td> -->
+                    <!-- <td><span class="badge rounded-pill text-bg-success">Delivered</span></td> -->
+                    <td *ngIf="iscancelEnable">
+                        <button class="py-0 btn btn-sm btn-outline-danger" (click)="cancelOrder(order)" >Cancel</button>
+                    </td>
+                    <!-- <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td> -->
+                </tr>
+
+                <!-- 
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>98765434567</td>
+                    <td>6878</td>
+                    <td><span class="badge rounded-pill text-bg-danger">Pending</span></td>
+                    <td *ngIf="iscancelEnable">
+                        <button class="py-0 btn btn-sm btn-outline-danger">Cancel</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>645678977</td>
+                    <td>458</td>
+                    <td><span class="badge rounded-pill text-bg-success">Delivered</span></td>
+                    <td *ngIf="iscancelEnable">
+                   </td>
+                </tr> -->
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

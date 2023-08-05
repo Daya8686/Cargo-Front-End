@@ -1,0 +1,171 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div>
+<!-- this is for booking cargo book a cargo page is starting from here  -->
+        <h4>Book a cargo</h4>
+    </div>
+    <div class="main-box p-1" style="width: 100%;">
+        <!-- Form is starting from here -->
+        <form style="" [formGroup]="bookingForm" (ngSubmit)="handleBook()"> <!--method for submit is created-->
+
+            <div class="row" *ngIf="!role.match('customer')"> <!--this will dynamically change for users it is only avilable for Admin and employee-->
+                <div class="col-6" *ngIf="!role.match('customer')">
+                    <label for="cargoorderId" class="form-label">Available Customers</label>
+                    <select class="form-select" formControlName="cargoorderId" id="cargoorderId"
+                        (change)="selectCustomer($event)"
+                        [ngClass]="{ 'is-invalid': submitted && a.cargoorderId.errors }">
+                        
+                        <option value="">-----</option> <!--Drop down is created here-->
+                        <option [value]="cus.customerId" id={{cus.customerEmail}} *ngFor="let cus of allCustomersList"> {{cus?.customerName}}
+                    </select>
+                    <div class="error-msg" *ngIf="submitted && a.cargoorderId.errors">
+                        <span style="color:red" *ngIf="a.cargoorderId.errors['required']">Customer is required.</span>
+                    </div>
+                </div>
+            </div>
+                <!-- For placing a order we crete this feeds with all validations and error messages -->
+            <div class="row" >
+                <div class="col-6">
+                    <label for="name" class="form-label">name</label>
+                    <input type="text" [value]="customerName" class="form-control" id="name"  disabled>
+
+
+                </div>
+
+                <div class="col-6">
+                    <label for="phone" class="form-label">Phone No</label>
+                    <input type="number" [value]="customerPhone" class="form-control" id="phone" disabled>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6" >
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" [value]="customerEmail" class="form-control" id="email" disabled>
+                </div>
+               
+
+
+
+
+                <div class="col-6">
+                    <label for="cargoorderDate" class="form-label">Order date</label> <!--calander input type date is created here-->
+                    <input type="date" class="form-control" id="cargoorderDate" formControlName="cargoorderDate"
+                        [ngClass]="{ 'is-invalid': submitted && a.cargoorderDate.errors }">
+
+                    <div class="error-msg" *ngIf="submitted && a.cargoorderDate.errors">
+                        <span style="color:red" *ngIf="a.cargoorderDate.errors['required']">Order Date
+                            is required.</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="cargoCatId" class="form-label">Select Cargo Type</label>
+                    <select class="form-select" formControlName="cargoCatId" id="cargoCatId"
+                        (change)="selectCargoCat($event); selectCargoPrice($event)"
+                        [ngClass]="{ 'is-invalid': submitted && a.cargoCatId.errors }"
+                        >
+                        <option value="">-----</option> <!--Drop down for cargo type to select-->
+                        <option [value]="cat.cargoCatId" id={{cat.cargoPrice}} *ngFor="let cat of cargoCategory"> {{cat?.cargoCategoryType}}
+                    </select>
+                    <div class="error-msg" *ngIf="submitted && a.cargoCatId.errors">
+                        <span style="color:red" *ngIf="a.cargoCatId.errors['required']">Cargo category
+                            is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" formControlName="quantity"
+                        [ngClass]="{ 'is-invalid': submitted && a.quantity.errors }">
+
+                    <div class="error-msg" *ngIf="submitted && a.quantity.errors">
+                        <span style="color:red" *ngIf="a.quantity.errors['required']">quantity
+                            is required.</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="fromCity" class="form-label">From City</label>
+                    <select class="form-select" formControlName="fromCity" id="fromCity"
+                        [ngClass]="{ 'is-invalid': submitted && a.fromCity.errors }">
+
+
+                        <option value="">-----</option> <!--city drop down-->
+                        <option [value]="city.cityId" *ngFor="let city of cities"> {{city?.cityName}}</option>
+                    </select>
+                    <div class="error-msg" *ngIf="submitted && a.fromCity.errors">
+                        <span style="color:red" *ngIf="a.fromCity.errors['required']">From City
+                            is required.</span>
+                    </div>
+
+                </div>
+
+
+                <div class="col-6">
+                    <label for="toCity" class="form-label">To City</label>
+                    <select class="form-select" formControlName="toCity" id="toCity"
+                        [ngClass]="{ 'is-invalid': submitted && a.toCity.errors }">
+
+                        
+                        <option value="">-----</option>
+                        <option [value]="city.cityId" *ngFor="let city of cities"> {{city?.cityName}}</option>
+                    </select>
+                    <div class="error-msg" *ngIf="submitted && a.toCity.errors">
+                        <span style="color:red" *ngIf="a.toCity.errors['required']">To City
+                            is required.</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="weight" class="form-label">Weight (Kg)</label>
+                    <input type="number" class="form-control" id="weight" formControlName="weight"
+                        [ngClass]="{ 'is-invalid': submitted && a.weight.errors }">
+
+                    <div class="error-msg" *ngIf="submitted && a.weight.errors">
+                        <span style="color:red" *ngIf="a.weight.errors['required']">weight
+                            is required.</span>
+                    </div>
+                </div>
+                    <!-- Calculate button is created here with calculateFare function on click -->
+                <div class="col-6 pt-4 mt-1">
+                    <button type="button" (click)="calculateFare()" class="btn btn-outline-dark text-center"
+                        style="">Calculate</button>
+
+                </div>
+            </div>
+
+
+
+            <div class="container amount-box mt-4">
+                <h5 class="d-flex justify-content-between"><span class="fw-bold">Amount</span> <span>{{amount}}</span>
+                </h5>
+                <h5 class="d-flex justify-content-between"><span class="fw-bold">GST</span> <span>{{gst}}%</span></h5>
+                <h5 class="d-flex justify-content-between"><span class="fw-bold">Total</span>
+                    <span>{{finalPrice}}</span>
+                </h5>
+            </div>
+
+
+            <div class="d-flex justify-content-center pt-4">
+                <button type="submit" class="btn btn-primary text-center" style="">Submit</button>
+            </div>
+
+        </form>
+
+
+
+
+    </div>
+
+</div>

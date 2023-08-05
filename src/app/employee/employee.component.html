@@ -1,0 +1,253 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div class="d-flex justify-content-between">
+
+        <h4>Employees management</h4>
+        <button class="btn btn-sm btn-outline-primary" (click)="open(content)">Add Employee</button>
+
+    </div>
+    <div class="main-box p-1" style="width: 100%;">
+        <form>
+            <div class="mb-3 row">
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text"
+                        (input)="filterSearch($event.target)" />
+                </div>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th class="badge-grey">#</th>
+                    <th class="badge-grey">Name</th>
+                    <th class="badge-grey">Mobile</th>
+                    <th class="badge-grey">Date of Joining</th>
+                    <th class="badge-grey">Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let emp of employees">
+                    <td>{{emp['employeeId'] || ''}}</td>
+                    <td>{{emp['employeeFName'] || ''}} {{emp['employeeLName'] || ''}} </td>
+                    <td>{{emp['phone'] || ''}}</td>
+                    <td>{{emp['joiningDate'] || ''}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" style="margin-right: 10px;"
+                            (click)="handleUpdateUser(emp); open(updateEmployee) ">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary" (click)="handleDeleteUser(emp)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add new employee</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <form [formGroup]="empForm" (ngSubmit)="addEmployeeSubmit()">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="name">First name</label>
+                        <input required="true" type="text" class="form-control" id="name" formControlName="employeeFName">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="name">Last name</label>
+                        <input required="true" type="text" class="form-control" id="name" formControlName="employeeLName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="mobile">Mobile</label>
+                        <input required="true" type="text" class="form-control" id="mobile" formControlName="phone">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="email">Email</label>
+                        <input required="true" type="text" class="form-control" id="email" formControlName="employeeEmail">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="bdate">Birth Date</label>
+                        <input required="true" type="date" class="form-control" id="bdate" formControlName="birthDate">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="joindate">Joining Date</label>
+                        <input required="true" type="date" class="form-control" id="joindate"
+                            formControlName="joiningDate">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="city" class="form-label">City</label>
+                    <select class="form-select"  formControlName="cityId" id="city">
+                        <!-- <select class="form-select"  (change)="selectCargoCat($event)"formControlName="city"> -->
+                        <option value="">-----</option>
+                        <option [value]="city.cityId" *ngFor="let city of cities"> {{city?.cityName}}</option>
+                    </select>
+
+                </div>
+
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom ">
+                        <label for="street">Street</label>
+                        <input required="true" type="text" class="form-control mt-2" id="street"
+                            formControlName="street">
+                    </div>
+                </div>
+              
+            </div>
+
+
+            <div class="mt-4 text-center">
+                <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Submit</button>
+            </div>
+
+
+        </form>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+</ng-template>
+
+
+
+
+
+
+
+
+<ng-template #updateEmployee let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update Employee data </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <form [formGroup]="empForm" (ngSubmit)="updateEmployeeSubmit()">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="name">First name</label>
+                        <input required="true" type="text" class="form-control" id="name" formControlName="employeeFName">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="name">Last name</label>
+                        <input required="true" type="text" class="form-control" id="name" formControlName="employeeLName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="mobile">Mobile</label>
+                        <input required="true" type="text" class="form-control" id="mobile" formControlName="phone">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="email">Email</label>
+                        <input required="true" type="text" class="form-control" id="email" formControlName="employeeEmail">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="bdate">Birth Date</label>
+                        <input required="true" type="date" class="form-control" id="bdate" formControlName="birthDate">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-1">
+                        <label for="joindate">Joining Date</label>
+                        <input required="true" type="date" class="form-control" id="joindate"
+                            formControlName="joiningDate">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="city" class="form-label">City</label>
+                    <select class="form-select"  formControlName="cityId" id="city">
+                        <!-- <select class="form-select"  (change)="selectCargoCat($event)"formControlName="city"> -->
+                        <option value="">-----</option>
+                        <option [value]="city.cityId" *ngFor="let city of cities"> {{city?.cityName}}</option>
+                    </select>
+
+                </div>
+
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom ">
+                        <label for="street">Street</label>
+                        <input required="true" type="text" class="form-control mt-2" id="street"
+                            formControlName="street">
+                    </div>
+                </div>
+              
+            </div>
+
+
+            <div class="mt-4 text-center">
+                <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Submit</button>
+            </div>
+
+
+        </form>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+</ng-template>

@@ -1,0 +1,39 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div class="d-flex justify-content-between">
+
+        <h4>Register requests</h4>
+        <!-- <button class="btn btn-sm btn-outline-primary" (click)="open(content)">Add Employee</button> -->
+
+    </div>
+    <div class="main-box p-1" style="width: 100%;">
+
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th class="badge-grey">#</th>
+                    <th class="badge-grey">Customer Name</th>
+                    <th class="badge-grey">Email</th>
+                    <th class="badge-grey">Mobile</th>
+                    <!-- <th class="badge-grey">Requested Date</th> -->
+                    <th class="badge-grey">Status</th>
+                    <!-- <th class="badge-grey">Action</th> -->
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user['customerId'] || ''}}</td>
+                    <td>{{user['customerName'] || ''}} </td>
+                    <td>{{user['customerEmail'] || ''}}</td>
+                    <td>{{user['customerPhone'] || ''}}</td>
+                    <td><span class="badge rounded-pill text-bg-success">Approved</span></td>
+                </tr>
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+</div>

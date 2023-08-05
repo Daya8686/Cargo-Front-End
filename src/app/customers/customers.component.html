@@ -1,0 +1,124 @@
+<div class="container d-flex flex-column  px-4 py-2" style="height: 100%;">
+    <div class="d-flex justify-content-between">
+
+        <h4>Customers</h4>
+
+    </div>
+    <div class="main-box p-1" style="width: 100%;">
+
+        <form>
+            <div class="mb-3 row">
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text"
+                        (input)="filterSearch($event.target)" />
+                </div>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th class="badge-grey">#</th>
+                    <th class="badge-grey">Name</th>
+                    <th class="badge-grey">Mobile</th>
+                    <th class="badge-grey">Address</th>
+                    <th class="badge-grey">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user['customerId'] || ''}}</td>
+                    <td>{{user['customerName'] || ''}} </td>
+                    <td>{{user['customerPhone'] || ''}}</td>
+                    <td>{{user['customerAddress'] || ''}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" style="margin-right: 10px;"
+                            (click)="handleUpdateUser(user); open(content)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                       
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <form 
+        [formGroup]="empForm" (ngSubmit)="updateCustomerSubmit()"
+        >
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="name">Name</label>
+                        <input [value]="selectedEmp.customerName"  required="true" type="text" class="form-control" id="name" formControlName="customerName">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="email">Email</label>
+                        <input [value]="selectedEmp.customerEmail"  required="true" type="text" class="form-control" id="email" formControlName="customerEmail">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="mobile">Mobile</label>
+                        <input [value]="selectedEmp.customerPhone"  required="true" type="text" class="form-control" id="mobile" formControlName="customerPhone">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group auth-form-group-custom mb-0">
+                        <label for="address">Address</label>
+                        <input [value]="selectedEmp.customerAddress"  required="true" type="text" class="form-control" id="address" formControlName="customerAddress">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="city" class="form-label">City</label>
+                    <select class="form-select" [value]="selectedEmp.cityId" formControlName="cityId" id="city">
+                        <!-- <select class="form-select"  (change)="selectCargoCat($event)"formControlName="city"> -->
+                        <option value="">-----</option>
+                        <option [value]="city.cityId" *ngFor="let city of cities"> {{city?.cityName}}</option>
+                    </select>
+
+                </div>
+
+              
+            </div>
+
+
+            <div class="mt-4 text-center">
+                <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Submit</button>
+            </div>
+
+
+        </form>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+</ng-template>

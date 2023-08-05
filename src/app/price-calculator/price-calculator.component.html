@@ -1,0 +1,53 @@
+<div class="container d-flex flex-column  p-4" style="height: 100%;">
+    <div>
+
+        <h4>Calculate Cargo Price</h4>
+    </div>
+    <br />
+    <div class="main-box p-1" style="width: 100%;">
+
+        <form [formGroup]="registerForm" >
+
+            <div class="row mb-4">
+                <div class="col-6">
+
+
+                    <label for="exampleInputEmail1" class="form-label">Select Cargo Type</label>
+                    <select class="form-select" (change)="selectCargoCat($event)" >
+                        <option value="">-----</option>
+                        <option [value]="cat.cargoPrice" *ngFor="let cat of cargoCategory"> {{cat?.cargoCategoryType}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label for="price" class="form-label">Price</label>
+                    <input class="form-control" formControlName="price" name="price" id="price" [value]="selectedCargoAmount" readonly>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-6">
+                    <label for="weight" class="form-label">Weight (Kg)</label>
+                    <input type="number" class="form-control" formControlName="weight" name="weight" id="weight">
+                </div>
+
+                <div class="col-6">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" formControlName="quantity" name="quantity" class="form-control" id="quantity">
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="d-flex align-items-center">
+                    <span class="fs-3 fw-bold">Amount: </span><span class="fs-3 fw-bold text-secondary px-2 pt-1">{{finalPrice}}</span>
+                </div>
+            </div>
+
+            <div class="" style="margin-top: 50px;">
+                <button type="button" (click)="calculateFare()" class="btn btn-primary">Calculate price</button>
+            </div>
+        </form>
+    </div>
+
+</div>

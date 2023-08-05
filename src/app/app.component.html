@@ -1,0 +1,470 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    /* flex: 1; */
+  }
+
+  .toolbar {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    /* background-color: #1976d2; */
+    background-color: #012c57;
+    color: white;
+    font-weight: 600;
+    justify-content: space-between;
+    box-shadow: 0px 0px 7px 2px black;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+  /* .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  } */
+
+  svg.material-icons {
+    height: 24px;
+    width: auto;
+  }
+
+  svg.material-icons:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  .card svg.material-icons path {
+    fill: #888;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .card {
+    all: unset;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    height: 40px;
+    width: 200px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+  }
+
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .card.card-small {
+    height: 16px;
+    width: 168px;
+  }
+
+  .card-container .card:not(.highlight-card) {
+    cursor: pointer;
+  }
+
+  .card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  }
+
+  .card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+  }
+
+  .card.highlight-card {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+  }
+
+  .card.card.highlight-card span {
+    margin-left: 60px;
+  }
+
+  svg#rocket {
+    width: 80px;
+    position: absolute;
+    left: -10px;
+    top: -24px;
+  }
+
+  svg#rocket-smoke {
+    height: calc(100vh - 95px);
+    position: absolute;
+    top: 10px;
+    right: 180px;
+    z-index: -10;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+
+  .terminal {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 6px;
+    padding-top: 45px;
+    margin-top: 8px;
+    overflow: hidden;
+    background-color: rgb(15, 15, 16);
+  }
+
+  .terminal::before {
+    content: "\2022 \2022 \2022";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: rgb(58, 58, 58);
+    color: #c2c3c4;
+    width: 100%;
+    font-size: 2rem;
+    line-height: 0;
+    padding: 14px 0;
+    text-indent: 4px;
+  }
+
+  .terminal pre {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    color: white;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+
+  .circle-link {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    margin: 8px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: 1s ease-out;
+  }
+
+  .circle-link:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+  }
+
+  footer a {
+    display: flex;
+    align-items: center;
+  }
+
+  .github-star-badge {
+    color: #24292e;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 3px 10px;
+    border: 1px solid rgba(27, 31, 35, .2);
+    border-radius: 3px;
+    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
+    margin-left: 4px;
+    font-weight: 600;
+  }
+
+  .github-star-badge:hover {
+    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+    border-color: rgba(27, 31, 35, .35);
+    background-position: -.5em;
+  }
+
+  .github-star-badge .material-icons {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+  }
+
+  svg#clouds {
+    position: fixed;
+    bottom: -160px;
+    left: -230px;
+    z-index: -10;
+    width: 1920px;
+  }
+
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+
+    .card-container>*:not(.circle-link),
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+
+  .sidebar {
+    flex: 1;
+    /* background-color: #012c81; */
+    background-color: #171c21;
+    height: auto;
+  }
+
+  .main-section {
+    flex: 4;
+    padding: 4rem 0;
+  }
+
+  footer {
+    box-shadow: 2px 0px 6px 1px #5e5757;
+    letter-spacing: 2px;
+    background-color: #171c21;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    height: 3rem;
+    color: white;
+    padding-left: 1rem;
+  }
+
+  .sidebar ul {
+    padding: 4rem 0;
+    height: 100%;
+  }
+
+  .sidebar ul>li {
+    border: 1px solid;
+    /* margin-bottom: 1rem; */
+  }
+
+  .sidebar ul>li>a {
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  .sidebar ul>li>a>span {
+    padding-left: 1rem;
+  }
+
+  .sidebar ul>li>a:hover {
+    background-color: aliceblue;
+  }
+</style>
+
+<!-- Toolbar -->
+<!-- We are rendering this page first then on this page we are implementing all the content
+this will contain header, footer, and sidebar -->
+<div class="d-flex flex-column justify-content-between">
+
+
+  <div class="toolbar " role="banner">
+    <img width="100" alt="Angular Logo" src="../assets/images/company-logo.jpeg">
+    <div class="fs-4 px-3">Cargo Manager System</div>
+
+    <div class="spacer d-flex justify-content-ccenter align-items-center">
+      <p *ngIf="islogin"><i class="fa fa-user"></i> {{userName}}</p>
+      <a routerLink="#" *ngIf="islogin" (click)="handleLogout()" class="text-light px-4 "> <i
+          class="fa fa-sign-out"></i>
+        Logout</a>
+
+      <a routerLink="#" *ngIf="!islogin" routerLink="login" class="text-light px-4 "> <i
+          class="fa fa-sign-in"></i>
+        Sign-In</a>
+    </div>
+  </div>
+
+  <div class="d-flex" role="main" style="min-height: 100vh;">
+
+
+    <div class="sidebar">
+      <ul className="navbar-nav pt-4">
+
+        <li className="nav-item main-logo-wrapper " *ngIf="menuType.match('customer')">
+          <a routerLink="/my-profile"> <span>Profile</span></a>
+        </li>
+
+        <li className="nav-item main-logo-wrapper " *ngIf="menuType.match('employee')">
+          <a routerLink="/emp-profile"> <span>Profile</span></a>
+        </li>
+
+        <li className="nav-item main-logo-wrapper " *ngIf="!menuType.match('customer')">
+          <a routerLink="/city"> <span>Search City</span></a>
+        </li>
+
+        <li className="nav-item main-logo-wrapper ">
+          <a routerLink="/cargoPrice"> <span>Calculate Cargo Price</span></a>
+        </li>
+
+        <li className="nav-item main-logo-wrapper" *ngIf="menuType!=''">
+          <a routerLink="/my-orders"> <span>Orders</span></a>
+        </li>
+
+
+        <li className="nav-item main-logo-wrapper">
+          <a routerLink="/cargo-booking"> <span>Book a Cargo</span></a>
+        </li>
+
+
+        <li className="nav-item main-logo-wrapper " *ngIf="menuType==''|| menuType.match('customer')">
+          <a routerLink="/my-orders" [queryParams]="{c: 'true'}"> <span>Cancel the Cargo</span></a>
+        </li>
+
+
+
+
+
+
+
+        <li className="nav-item main-logo-wrapper " *ngIf="menuType.match('admin')">
+          <a routerLink="/employee"> <span>Employee</span></a>
+        </li>
+
+        <li className="nav-item main-logo-wrapper d-none" *ngIf="menuType.match('admin')">
+          <a routerLink="/cargo"> <span>Cargo</span></a>
+        </li>
+
+        <li className="nav-item main-logo-wrapper d-none" *ngIf="menuType.match('admin')">
+          <a routerLink="/register-request"> <span>Register Requests</span></a>
+        </li>
+
+
+        <li className="nav-item main-logo-wrapper " *ngIf="menuType.match('admin') || menuType.match('employee')">
+          <a routerLink="/customers"> <span>Customers</span></a>
+        </li>
+
+      </ul>
+
+
+    </div>
+
+    <div class="main-section">
+      <router-outlet></router-outlet>
+      <!-- From this router-outlet we are geting all the route modules from app-routing.modules.ts -->
+    </div>
+
+  </div>
+
+
+
+  <!-- Footer -->
+  <footer>
+    @copyright Capgemini Indian pvt ltd
+  </footer>
+
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

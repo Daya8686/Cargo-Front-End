@@ -1,0 +1,53 @@
+<div class="container d-flex flex-column  p-4" style="height: 100%;">
+
+
+    <div>
+
+        <h4>Cities</h4>
+    </div>
+    <br />
+    <div class="main-box p-1" style="width: 100%;">
+
+
+        <form>
+            <div class="mb-3 row">
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text"
+                        (input)="filterSearch($event.target)" />
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" [hidden]="userType!='admin'">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr [hidden]="cities.length>0">
+                    <td colspan="4" class="text-center">No Data Found</td>
+                </tr>
+                <tr *ngFor="let city of cities">
+
+                    <th scope="row">{{ city.cityId}}</th>
+                    <td>
+                        {{city.cityName}}
+                    </td>
+                    <!-- <td><span class="badge rounded-pill text-bg-success">Active</span></td> -->
+                    <td><span class="badge rounded-pill text-bg-success">Active</span></td>
+                    <td [hidden]="userType!='admin'">
+                        <button class="btn btn-sm py-0 btn-outline-primary">
+                            Activate
+                        </button>
+                    </td>
+                    <!-- <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
